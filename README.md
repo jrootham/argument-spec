@@ -20,7 +20,7 @@ argument|argument to validate
 Specification|Valid argument
 -----------|----------
 ''|string
-'regex'|argument matching regex
+'regex'|string argument matching regex
 0 (or any number)|number
 true (or false)|boolean
 []|any Array
