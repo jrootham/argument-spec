@@ -6,9 +6,9 @@ A library to ease argument checking, espcially complex arguments like options ob
 Usage
 =====
 
-argumentSpec = require('argumentSpec.js');
+    var argumentSpec = require('argumentSpec.js');
 
-errorArray = argumentSpec.validate(name, spec, argument);
+    var errorArray = argumentSpec.validate(name, spec, argument);
 
 Variable| Meaning
 ---------|---------
@@ -20,13 +20,13 @@ argument|argument to validate
 Specification|Valid argument
 -----------|----------
 ''|string
-'regex'|argument matching regex
+'regex'|string argument matching regex
 0 (or any number)|number
 true (or false)|boolean
 []|any Array
 [spec]|Array all of whose elements match spec
-[spec1, spec2, ...]|Argument that matches one of the specs
-{}|Empty Object
+[spec1, spec2, ...]|Exact match for the array argument
+{}|Any Object
 {key1:spec, key2:spec2,...}| Object containing exactly key1, key2,... where each property matches the corresponding spec. Keys are included in the name part of any error message. This spec can be recursively applied.
 
 
