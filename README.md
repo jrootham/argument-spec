@@ -25,7 +25,7 @@ Specification|Valid argument
 true (or false)|boolean
 []|any Array
 [spec]|Array all of whose elements match spec
-[spec1, spec2, ...]|Argument that matches one of the specs
+[spec1, spec2, ...]|Exact match for the array argument
 {}|Empty Object
 {key1:spec, key2:spec2,...}| Object containing exactly key1, key2,... where each property matches the corresponding spec. Keys are included in the name part of any error message. This spec can be recursively applied.
 
