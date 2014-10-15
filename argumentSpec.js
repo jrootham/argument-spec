@@ -54,6 +54,13 @@
             result = result.concat(name + " is not an object");
         }
         else {
+            var specKeys = Object.keys(spec);
+            var argumentKeys = Object.keys(argument);
+            argumentKeys.forEach(function (key) {
+                if (-1 === specKeys.indexOf(key)) {
+                    result = result.concat(name + ":" + key + " is not in the spec")
+                }
+            })
         }
 
         return result;
