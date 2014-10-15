@@ -19,6 +19,7 @@ argument|argument to validate
 
 Specification|Valid argument
 -----------|----------
+undefined|anything
 ''|string
 'regex'|string argument matching regex
 0 (or any number)|number
@@ -35,7 +36,18 @@ Array and object specs nest.
 Validation Functions
 =====================
 
-Functions and related specifications are defined as properties of objects created by the function argumentSpec.Base. Here is an example:
+Functions and related specifications are defined as properties of objects created by the function argumentSpec.Base. 
+
+Function| definition
+------------|---
+some([spec1, spec2,...]|           some spec is true for argument
+every([spec1, spec2,...]|          every spec it true for argument
+range(low, high)|          numeric argument in low..high range (inclusive)
+integer()|        integer (fractional part is 0)
+integerRange(low, high)|   integer in low..high range (example of composed spec)
+
+You can write your own validation functions.
+Here is an example:
 
     /*
      *      Validation function that tests that a numeric argument is in a given range 
