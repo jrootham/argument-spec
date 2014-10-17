@@ -44,6 +44,7 @@ some([spec1, spec2,...]|           some spec is true for argument
 every([spec1, spec2,...]|          every spec is true for argument (useful for composing specs)
 range(low, high)|          numeric argument in low..high range (inclusive)
 integer()|        integer (fractional part is 0)
+length(maxLength) | argument.length <= maxLength (argument.length must exist)
 instance(object)|instanceof object
 
 You can write your own validation functions.
@@ -54,20 +55,43 @@ Here is an example:
      */
 
     var instance = function (thing) {
-        var integer = new Base();
+        var instance = new Base();
 
-        integer.validate = function(name, argument) {
-            if (! argument instanceof thing) {
-                return [name + " is not an an instance "]
+        instance.validate = function(name, argument) {
+            if (! (argument instanceof thing)) {
+                return [name + " is not an instance"]
             }
 
             return [];
         }
 
+        return instance;
     }
+
 
 Example of Use
 ==============
+
+    var write = function(file, data, fetch) {
+        var fileSpec = {
+            name:argumentSpec.every([argumentSpec.length(10), "[a-z]+"]) ,
+            extension: "jpg|gif"
+        };
+
+        var dataSpec = {
+            width: argumentSpec.range(20, 500),
+            height: argumentSpec.range(20, 500),
+            buffer: argumentSpec.instance(Buffer)
+        };
+
+        var errorArray = argumentSpec.validate('file', fileSpec, file);
+        errorArray = errorArray.concat(argumentSpec.validate('data', dataSpec, data));
+        errorArray = errorArray.concat(argumentSpec.validate('fetch', function(){}, fetch));
+
+        if (errorArray.length > 0) {
+            throw new Error(errorArray.join('\n'));
+        }
+    }
 
 
             
