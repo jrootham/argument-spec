@@ -41,10 +41,10 @@ Functions and related specifications are defined as properties of objects create
 Function| definition
 ------------|---
 some([spec1, spec2,...]|           some spec is true for argument
-every([spec1, spec2,...]|          every spec it true for argument
+every([spec1, spec2,...]|          every spec it true for argument (useful for composing specs)
 range(low, high)|          numeric argument in low..high range (inclusive)
 integer()|        integer (fractional part is 0)
-integerRange(low, high)|   integer in low..high range (example of composed spec)
+instance(function)|instanceof function
 
 You can write your own validation functions.
 Here is an example:
@@ -60,8 +60,6 @@ Here is an example:
         range.spec = {low: low, high: high};
 
         range.validate = function (name, spec, argument) {
-            var result = [];
-
             // validate the spec for numerics
             
             result = validate(name + ':spec', {low: 0, high: 0}, spec);  
@@ -70,24 +68,18 @@ Here is an example:
             
             if (result.length === 0) {
                 if (spec.low > spec.high) {
-                    result = [name + ":spec out of order"]
+                    return [name + ":spec out of order"];
                 }
             }
 
-            if (result.length === 0) {
-                result = validate(name, 0, argument);
-
-                if (result.length === 0) {
-                    if (spec.low > argument) {
-                        result = [name + ' is lower than ' + spec.low];
-                    }
-                    if (spec.high < argument) {
-                        result = [name + ' is higher than ' + spec.high];
-                    }
-                }
+            if (spec.low > argument) {
+                return [name + ' is lower than ' + spec.low];
             }
-
-            return result;
+            if (spec.high < argument) {
+                return [name + ' is higher than ' + spec.high];
+            }
+            
+            return [];
         }
 
         return range;
