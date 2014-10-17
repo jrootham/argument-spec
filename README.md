@@ -44,7 +44,7 @@ some([spec1, spec2,...]|           some spec is true for argument
 every([spec1, spec2,...]|          every spec it true for argument (useful for composing specs)
 range(low, high)|          numeric argument in low..high range (inclusive)
 integer()|        integer (fractional part is 0)
-instance(function)|instanceof function
+instance(object)|instanceof object
 
 You can write your own validation functions.
 Here is an example:
