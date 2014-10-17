@@ -41,7 +41,7 @@ Functions and related specifications are defined as properties of objects create
 Function| definition
 ------------|---
 some([spec1, spec2,...]|           some spec is true for argument
-every([spec1, spec2,...]|          every spec it true for argument (useful for composing specs)
+every([spec1, spec2,...]|          every spec is true for argument (useful for composing specs)
 range(low, high)|          numeric argument in low..high range (inclusive)
 integer()|        integer (fractional part is 0)
 instance(object)|instanceof object
@@ -50,40 +50,25 @@ You can write your own validation functions.
 Here is an example:
 
     /*
-     *      Validation function that tests that a numeric argument is in a given range 
-     *      (closed interval)
+     *      Validation function that tests if the argument is an instance of another object
      */
 
-    var range = function(low, high) {
-        var range = new Base();
+    var instance = function (thing) {
+        var integer = new Base();
 
-        range.spec = {low: low, high: high};
-
-        range.validate = function (name, spec, argument) {
-            // validate the spec for numerics
-            
-            result = validate(name + ':spec', {low: 0, high: 0}, spec);  
-            
-            // and they are in the right order
-            
-            if (result.length === 0) {
-                if (spec.low > spec.high) {
-                    return [name + ":spec out of order"];
-                }
+        integer.validate = function(name, argument) {
+            if (! argument instanceof thing) {
+                return [name + " is not an an instance "]
             }
 
-            if (spec.low > argument) {
-                return [name + ' is lower than ' + spec.low];
-            }
-            if (spec.high < argument) {
-                return [name + ' is higher than ' + spec.high];
-            }
-            
             return [];
         }
 
-        return range;
     }
+
+Example of Use
+==============
+
 
             
 
