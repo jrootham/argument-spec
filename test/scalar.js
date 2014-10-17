@@ -26,12 +26,28 @@
 
         describe('number tests', function(){
             it('should return [] if number spec matches number argument', function(){
-                var errorArray = argumentSpec.validate('number', 0, 0);
+                var errorArray = argumentSpec.validate('number', 0, 3);
                 expect(errorArray.length).to.equal(0);
             })
 
-            it('should return [error] if number spec fails to match', function(){
+            it('should return [] if NaN spec matches number argument', function(){
+                var errorArray = argumentSpec.validate('number',NaN, 4);
+                expect(errorArray.length).to.equal(0);
+            })
+
+            it('should return [] if Infinity spec matches number argument', function(){
+                var errorArray = argumentSpec.validate('number', Infinity, 6);
+                expect(errorArray.length).to.equal(0);
+            })
+
+            it('should return [error] if number spec fails to match boolean', function(){
                 var errorArray = argumentSpec.validate('number', 0, true);
+                expect(errorArray.length).to.equal(1);
+                expect(errorArray[0]).to.equal('number is not a number');
+            })
+
+            it('should return [error] if number spec fails to match string', function(){
+                var errorArray = argumentSpec.validate('number', 0, 'foo');
                 expect(errorArray.length).to.equal(1);
                 expect(errorArray[0]).to.equal('number is not a number');
             })
@@ -62,11 +78,34 @@
         })
     })
 
-    describe('other scalars', function () {
+    describe('function', function () {
+        it('should return [] if argument is function', function () {
+            var errorArray = argumentSpec.validate('function', function(){}, function(){});
+            expect(errorArray.length).to.equal(0);
+        })
+
+        it('should return [error] if argument is not function', function () {
+            var errorArray = argumentSpec.validate('function', function(){}, true);
+            expect(errorArray.length).to.equal(1);
+            expect(errorArray[0]).to.equal('function is not a function');
+        })
+    })
+
+        describe('other scalars', function () {
         it('should return [error] if spec is null', function(){
             var errorArray = argumentSpec.validate('isnull', null, 1);
             expect(errorArray.length).to.equal(1);
             expect(errorArray[0]).to.equal('isnull spec should not be null');
+        })
+
+        it('should return [] if spec is undefined', function(){
+            var errorArray = argumentSpec.validate('isundefined', undefined, 1);
+            expect(errorArray.length).to.equal(0);
+        })
+
+        it('should return [] if spec is undefined', function(){
+            var errorArray = argumentSpec.validate('isundefined', undefined, function () {});
+            expect(errorArray.length).to.equal(0);
         })
     })
 

@@ -12,8 +12,8 @@
 
 
     describe('Object argument spec', function() {
-        it('should return [] if Object spec matches Object argument', function () {
-            var errorArray = argumentSpec.validate('object', {}, {a: 1, b: 2});
+        it('should return [] if empty Object spec matches empty Object argument', function () {
+            var errorArray = argumentSpec.validate('object', {}, {});
             expect(errorArray.length).to.equal(0);
         })
 
@@ -28,16 +28,28 @@
             expect(errorArray.length).to.equal(0);
         })
 
-        it('should return [error] if an Object spec is not in argument', function () {
-            var errorArray = argumentSpec.validate('object', {a:0, b:0}, {a:1, d:"foo"});
+        it('should return [error] if an argument property is not in spec', function () {
+            var errorArray = argumentSpec.validate('object', {a:0, b:0}, {a:1, b:4, d:"foo"});
             expect(errorArray.length).to.equal(1);
             expect(errorArray[0]).to.equal('object:d is not in the spec');
+        })
+
+        it('should return [error] if an spec property is not in argument', function () {
+            var errorArray = argumentSpec.validate('object', {a:0, b:0}, {a:1});
+            expect(errorArray.length).to.equal(1);
+            expect(errorArray[0]).to.equal('object:b is not in the argument');
         })
 
         it('should return [error] if an Object spec does not match an argument', function () {
             var errorArray = argumentSpec.validate('object', {a:0, b:0}, {a:1, b:"foo"});
             expect(errorArray.length).to.equal(1);
             expect(errorArray[0]).to.equal('object:b is not a number');
+        })
+
+        it('should return [error] if an Object spec does not match a nested argument', function () {
+            var errorArray = argumentSpec.validate('object', {a:0, b:{a:0}}, {a:1,b: {a:"foo"}});
+            expect(errorArray.length).to.equal(1);
+            expect(errorArray[0]).to.equal('object:b:a is not a number');
         })
 
     })
