@@ -70,7 +70,7 @@
 
     var validateObject = function (name, spec, argument) {
         if (spec instanceof Base) {
-            var result = validate(name + ':spec', {validate: function () {}}, spec);
+            var result = validate(name + ':spec', {validate: function (name, spec) {}}, spec);
 
             if (0 !== result.length) {
                 return result;
@@ -136,6 +136,10 @@
             case typeof function () {}:
                 if (typeof argument !== typeof function () {}) {
                     return [name + " is not a function"];
+                }
+
+                if (spec.length !== argument.length) {
+                    return [name + " argument lists length is wrong"]
                 }
                 break;
 

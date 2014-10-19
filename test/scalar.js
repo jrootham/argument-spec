@@ -80,8 +80,20 @@
 
     describe('function', function () {
         it('should return [] if argument is function', function () {
-            var errorArray = argumentSpec.validate('function', function(){}, function(){});
+            var errorArray = argumentSpec.validate('function', function(a, b){}, function(a, b){});
             expect(errorArray.length).to.equal(0);
+        })
+
+        it('should return [error] if argument has more arguments', function () {
+            var errorArray = argumentSpec.validate('function', function(a){}, function(a, b){});
+            expect(errorArray.length).to.equal(1);
+            expect(errorArray[0]).to.equal('function argument lists length is wrong');
+        })
+
+        it('should return [error] if argument has fewer arguments', function () {
+            var errorArray = argumentSpec.validate('function', function(a){}, function(){});
+            expect(errorArray.length).to.equal(1);
+            expect(errorArray[0]).to.equal('function argument lists length is wrong');
         })
 
         it('should return [error] if argument is not function', function () {
