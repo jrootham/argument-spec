@@ -6,7 +6,7 @@ A library to ease argument checking, espcially complex arguments like options ob
 Usage
 =====
 
-    var argumentSpec = require('argumentSpec.js');
+    var argumentSpec = require('argument-spec.js');
 
     var errorArray = argumentSpec.validate(name, spec, argument);
 
