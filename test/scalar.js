@@ -8,7 +8,7 @@
 (function () {
     "use strict"
     var expect = require("chai").expect;
-    var argumentSpec = require('../argumentSpec.js');
+    var argumentSpec = require('argument-spec');
 
     describe('Scalar argument spec', function(){
         describe('boolean tests', function(){

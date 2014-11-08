@@ -9,7 +9,7 @@
     "use strict"
 
     var expect = require("chai").expect;
-    var argumentSpec = require('../argumentSpec.js');
+    var argumentSpec = require('argument-spec');
 
     describe('Function argument spec', function() {
         describe('some', function () {
