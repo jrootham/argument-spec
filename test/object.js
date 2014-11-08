@@ -12,8 +12,13 @@
 
 
     describe('Object argument spec', function() {
-        it('should return [] if empty Object spec matches empty Object argument', function () {
+        it('should return [] if empty Object spec for empty object argument', function () {
             var errorArray = argumentSpec.validate('object', {}, {});
+            expect(errorArray.length).to.equal(0);
+        })
+
+        it('should return [] if empty Object spec for object argument', function () {
+            var errorArray = argumentSpec.validate('object', {}, {a:0, b:1});
             expect(errorArray.length).to.equal(0);
         })
 
@@ -28,10 +33,23 @@
             expect(errorArray.length).to.equal(0);
         })
 
-        it('should return [error] if an argument property is not in spec', function () {
+        it('should return [] if spec is in argument prototype chain', function () {
+            var triangle = {a:1, b:2, c:3};
+
+            function ColoredTriangle() {
+                this.color = "red";
+            }
+
+            ColoredTriangle.prototype = triangle;
+
+            var obj = new ColoredTriangle();
+            var errorArray = argumentSpec.validate('object', {a:0, b:0, c:0}, obj);
+            expect(errorArray.length).to.equal(0);
+        })
+
+        it('should return [] if an argument property is not in spec', function () {
             var errorArray = argumentSpec.validate('object', {a:0, b:0}, {a:1, b:4, d:"foo"});
-            expect(errorArray.length).to.equal(1);
-            expect(errorArray[0]).to.equal('object:d is not in the spec');
+            expect(errorArray.length).to.equal(0);
         })
 
         it('should return [error] if an spec property is not in argument', function () {

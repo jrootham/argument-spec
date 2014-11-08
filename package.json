@@ -1,0 +1,28 @@
+{
+  "name": "argument-spec",
+  "version": "1.0.0",
+  "description": "Package to validate function arguments",
+  "main": "argument-spec.js",
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jrootham/argument-spec.git"
+  },
+  "keywords": [
+    "argument",
+    "specification",
+    "validation"
+  ],
+  "author": "Jim Rootham <jrootham@gmail.com>",
+  "license": "LGPL",
+  "bugs": {
+    "url": "https://github.com/jrootham/argument-spec/issues"
+  },
+  "homepage": "https://github.com/jrootham/argument-spec"
+}

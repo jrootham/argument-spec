@@ -10,7 +10,7 @@
 
     var EventEmitter = require('events').EventEmitter;
 
-    var argumentSpec = require ('../argumentSpec.js');
+    var argumentSpec = require ('../argument-spec.js');
 
     var write = function(file, data, fetch) {
         var fileSpec = {
