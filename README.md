@@ -1,4 +1,4 @@
-argumentSpec
+argument-spec
 ============
 
 A library to ease argument checking, espcially complex arguments like options objects.
@@ -6,7 +6,7 @@ A library to ease argument checking, espcially complex arguments like options ob
 Usage
 =====
 
-    var argumentSpec = require('argumentSpec.js');
+    var argumentSpec = require('argument-spec.js');
 
     var errorArray = argumentSpec.validate(name, spec, argument);
 
@@ -28,8 +28,8 @@ true (or false)|boolean
 [spec]|Array all of whose elements match spec
 [spec1, spec2, ...]|Exact match for the array argument
 function(a1,a2, ...)|Argument is function with matching number of arguments
-{}|Empty Object
-{key1:spec, key2:spec2,...}| Object containing exactly key1, key2,... where each property matches the corresponding spec. Keys are included in the name part of any error message. 
+{}|Any Object
+{key1:spec, key2:spec2,...}| Object containing key1, key2,... where each property matches the corresponding spec. Keys are included in the name part of any error message. 
 argumentSpec.Base->{validate:function, spec:{key1:spec, key2:spec2,...}}| A function that validates an argument using a spec object (see below).
 
 Array and object specs nest.
