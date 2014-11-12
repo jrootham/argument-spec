@@ -8,7 +8,7 @@
 (function () {
     "use strict"
     var expect = require("chai").expect;
-    var argumentSpec = require('argument-spec');
+    var argumentSpec = require('../argument-spec.js');
 
     describe('Array argument spec', function() {
         it('should return [] if Array spec matches Array argument', function(){

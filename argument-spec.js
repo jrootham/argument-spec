@@ -65,7 +65,9 @@
     };
 
     /*
-     *      Tests for when spec is an object
+     *      Tests for when spec is an object (includes case where the spec is a function to call)
+     *      This test returns an error if a property in the spec is not in the argument
+     *      It includes members of the prototype chain
      */
 
     var validateObject = function (name, spec, argument) {
@@ -305,6 +307,81 @@
         return length;
     }
 
+    /*
+     *      Validation function that tests if 2 objects match exactly
+     *      Useful when using objects as option sets without defaults
+     */
+
+    var exact = function(spec) {
+        var exact = new Base();
+
+        exact.validate = function(name, argument) {
+            var result = [];
+
+            if (typeof spec !== typeof {}) {
+                return [name + " spec is not an object"];
+            }
+
+            if (typeof argument !== typeof {}) {
+                return [name + " argument is not an object"];
+            }
+
+            var specKeys = Object.keys(spec);
+
+            specKeys.forEach(function (key) {
+                if (! (key in argument)) {
+                    result = result.concat(name + ":" + key + " is not in the argument")
+                }
+                else {
+                    result = result.concat(validate(name + ":" + key, spec[key], argument[key]))
+                }
+            })
+
+            var argKeys = Object.keys(argument);
+
+            argKeys.forEach(function (key) {
+                if (! (key in spec)) {
+                    result = result.concat(name + ":" + key + " is not in the spec")
+                }
+            })
+
+            return result;
+        }
+
+        return exact;
+    }
+
+    var optional = function(spec) {
+        var optional = new Base();
+
+        optional.validate = function(name, argument) {
+            var result = [];
+
+            if (typeof spec !== typeof {}) {
+                return [name + " spec is not an object"];
+            }
+
+            if (typeof argument !== typeof {}) {
+                return [name + " argument is not an object"];
+            }
+
+            var argKeys = Object.keys(argument);
+
+            argKeys.forEach(function (key) {
+                if (! (key in spec)) {
+                    result = result.concat(name + ":" + key + " is not in the spec")
+                }
+                else {
+                    result = result.concat(validate(name + ":" + key, spec[key], argument[key]))
+                }
+            })
+
+            return result;
+        }
+
+        return optional;
+    }
+
     var ship = {
         validate:       validate,
         Base:           Base,
@@ -313,7 +390,9 @@
         range:          range,
         integer:        integer,
         instance:       instance,
-        length:         length
+        length:         length,
+        exact:          exact,
+        optional:       optional
     };
 
 // Just return a value to define the module export.

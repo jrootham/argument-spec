@@ -7,7 +7,7 @@
  */
 (function () {
     "use strict"
-    var argumentSpec = require('../argumentSpec.js');
+    var argumentSpec = require('../argument-spec.js');
 
     var triangle = {a:1, b:2, c:3};
 
@@ -27,6 +27,8 @@
     console.log(errorArray);
     var spec = argumentSpec.every(argumentSpec.integer(), argumentSpec.range(3, 10));
     var errorArray = argumentSpec.validate('every',spec, 5);
+    console.log(errorArray);
+    var errorArray = argumentSpec.validate('exact', argumentSpec.exact({a:1}), {a:1, b:2})
     console.log(errorArray);
 
 })()
