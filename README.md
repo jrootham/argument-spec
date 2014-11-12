@@ -47,7 +47,8 @@ range(low, high)|          numeric argument in low..high range (inclusive)
 integer()|        integer (fractional part is 0)
 length(maxLength) | argument.length <= maxLength (argument.length must exist)
 instance(object)|instanceof object
-
+exact(object)|exact match for object properties, useful for options without defaults
+optional(object)|permit missing properties in the argument, useful for options with defaults
 You can write your own validation functions.
 Here is an example:
 
