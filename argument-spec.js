@@ -67,6 +67,7 @@
     /*
      *      Tests for when spec is an object (includes case where the spec is a function to call)
      *      This test returns an error if a property in the spec is not in the argument
+     *      It does not return an error if a property in the argument is not in the spec
      *      It includes members of the prototype chain
      */
 
@@ -184,10 +185,16 @@
                 return result;
             }
 
-            if (!specArray.some(function (item) {
-                return 0 === (validate('', item, argument)).length;
+            if (!specArray.some(function (spec) {
+                return 0 === (validate('', spec, argument)).length;
             })) {
-                return [name + " does not match any spec"];
+                var result = specArray.reduce(function(result, spec, index, array) {
+                    result = result.concat(validate(name + ':' + index, spec, argument));
+
+                    return result;
+                }, [name + " does not match any spec"])
+
+                return result;
             }
 
             return [];
