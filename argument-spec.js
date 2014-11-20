@@ -189,7 +189,7 @@
                 return 0 === (validate('', spec, argument)).length;
             })) {
                 var result = specArray.reduce(function(result, spec, index, array) {
-                    result = result.concat(validate(name + ':' + index, spec, argument));
+                    result = result.concat(validate(name + ':some:' + index, spec, argument));
 
                     return result;
                 }, [name + " does not match any spec"])

@@ -27,8 +27,8 @@
                 var errorArray = argumentSpec.validate('some', argumentSpec.some([0, true]), "foo");
                 expect(errorArray.length).to.equal(3);
                 expect(errorArray[0]).to.equal('some does not match any spec');
-                expect(errorArray[1]).to.equal('some:0 is not a number');
-                expect(errorArray[2]).to.equal('some:1 is not a boolean');
+                expect(errorArray[1]).to.equal('some:some:0 is not a number');
+                expect(errorArray[2]).to.equal('some:some:1 is not a boolean');
             })
         });
 
