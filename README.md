@@ -1,10 +1,8 @@
-argument-spec
-============
+# argument-spec
 
-A library to ease argument checking, espcially complex arguments like options objects.
+A library to ease argument checking, especially complex arguments like options objects.
 
-Usage
-=====
+###Usage
 
     var argumentSpec = require('argument-spec.js');
 
@@ -34,8 +32,7 @@ argumentSpec.Base->{validate:function, spec:{key1:spec, key2:spec2,...}}| A func
 
 Array and object specs nest.
 
-Validation Functions
-=====================
+### Validation Functions
 
 Functions and related specifications are defined as properties of objects created by the function argumentSpec.Base. 
 
@@ -71,8 +68,7 @@ Here is an example:
     }
 
 
-Example of Use
-==============
+### Example of Use
 
     var write = function(file, data, fetch) {
         var fileSpec = {
