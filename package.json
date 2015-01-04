@@ -1,6 +1,6 @@
 {
   "name": "argument-spec",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "Package to validate function arguments",
   "main": "argument-spec.js",
   "directories": {

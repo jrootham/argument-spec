@@ -16,7 +16,7 @@
         module.exports = factory();
     } else {
 // Browser globals (root is window)
-        root.returnExports = factory();
+        root.argumentSpec = factory();
     }
 }(this, function () {
     "use strict"
