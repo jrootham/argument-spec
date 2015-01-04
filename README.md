@@ -27,7 +27,7 @@ Download argument-spec.js from the most recent release at https://github.com/jro
 
     var write = function(file, data, fetch) {
         var fileSpec = {
-            name:argumentSpec.every([argumentSpec.length(10), "[a-z]+"]) ,
+            name:argumentSpec.every([argumentSpec.length(10), '[a-z]+']) ,
             extension: "jpg|gif"
         };
 
