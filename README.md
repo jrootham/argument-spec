@@ -1,21 +1,52 @@
-argument-spec
-============
+# argument-spec
 
-A library to ease argument checking, espcially complex arguments like options objects.
+A library to ease argument checking, especially complex arguments like options objects.
 
-Usage
-=====
+###Usage
+####Node, Browserify
+At command prompt
 
-    var argumentSpec = require('argument-spec.js');
+    npm install argument-spec
 
-    var errorArray = argumentSpec.validate(name, spec, argument);
+In code
 
-Variable| Meaning
----------|---------
-errorArray|array of string error messages (empty if no errors)
-name|name of argument, included in error messages
-spec|specification of expected argument (see below)
-argument|argument to validate
+    argumentSpec = require('argument-spec');
+    
+####RequireJS
+
+Download argument-spec.js from the most recent release at https://github.com/jrootham/argument-spec/releases and put it in your lib directory.
+
+    var argumentSpec = require('argument-spec');
+
+####Script tag
+    <script type="text/javascript"
+            src="https://cdn.rawgit.com/jrootham/argument-spec/v3.0.0/argument-spec.js">
+    </script>
+    
+#### Example of Use
+
+    var write = function(file, data, fetch) {
+        var fileSpec = {
+            name:argumentSpec.every([argumentSpec.length(10), '[a-z]+']) ,
+            extension: "jpg|gif"
+        };
+
+        var dataSpec = {
+            width: argumentSpec.range(20, 500),
+            height: argumentSpec.range(20, 500),
+            buffer: argumentSpec.instance(Buffer)
+        };
+
+        var errorArray = argumentSpec.validate('file', fileSpec, file);
+        errorArray = errorArray.concat(argumentSpec.validate('data', dataSpec, data));
+        errorArray = errorArray.concat(argumentSpec.validate('fetch', function(){}, fetch));
+
+        if (errorArray.length > 0) {
+            throw new Error(errorArray.join('\n'));
+        }
+    }
+
+####Specification meanings
 
 Specification|Valid argument
 -----------|----------
@@ -34,8 +65,7 @@ argumentSpec.Base->{validate:function, spec:{key1:spec, key2:spec2,...}}| A func
 
 Array and object specs nest.
 
-Validation Functions
-=====================
+### Validation Functions
 
 Functions and related specifications are defined as properties of objects created by the function argumentSpec.Base. 
 
@@ -70,30 +100,6 @@ Here is an example:
         return instance;
     }
 
-
-Example of Use
-==============
-
-    var write = function(file, data, fetch) {
-        var fileSpec = {
-            name:argumentSpec.every([argumentSpec.length(10), "[a-z]+"]) ,
-            extension: "jpg|gif"
-        };
-
-        var dataSpec = {
-            width: argumentSpec.range(20, 500),
-            height: argumentSpec.range(20, 500),
-            buffer: argumentSpec.instance(Buffer)
-        };
-
-        var errorArray = argumentSpec.validate('file', fileSpec, file);
-        errorArray = errorArray.concat(argumentSpec.validate('data', dataSpec, data));
-        errorArray = errorArray.concat(argumentSpec.validate('fetch', function(){}, fetch));
-
-        if (errorArray.length > 0) {
-            throw new Error(errorArray.join('\n'));
-        }
-    }
 
 
             
