@@ -3,10 +3,44 @@
 A library to ease argument checking, especially complex arguments like options objects.
 
 ###Usage
+####Node, Browserify
+    npm install argument-spec
+    
+    argumentSpec = require('argument-spec');
+    
+####RequireJS
 
-    var argumentSpec = require('argument-spec.js');
+Download argument-spec.js from the most recent release at https://github.com/jrootham/argument-spec/releases and put it in your lib directory.
 
-    var errorArray = argumentSpec.validate(name, spec, argument);
+    var argumentSpec = require('argument-spec');
+
+####Script tag
+    <script type="text/javascript"
+            src="https://cdn.rawgit.com/jrootham/argument-spec/v3.0.0/argument-spec.js">
+    </script>
+    
+#### Example of Use
+
+    var write = function(file, data, fetch) {
+        var fileSpec = {
+            name:argumentSpec.every([argumentSpec.length(10), "[a-z]+"]) ,
+            extension: "jpg|gif"
+        };
+
+        var dataSpec = {
+            width: argumentSpec.range(20, 500),
+            height: argumentSpec.range(20, 500),
+            buffer: argumentSpec.instance(Buffer)
+        };
+
+        var errorArray = argumentSpec.validate('file', fileSpec, file);
+        errorArray = errorArray.concat(argumentSpec.validate('data', dataSpec, data));
+        errorArray = errorArray.concat(argumentSpec.validate('fetch', function(){}, fetch));
+
+        if (errorArray.length > 0) {
+            throw new Error(errorArray.join('\n'));
+        }
+    }
 
 Variable| Meaning
 ---------|---------
@@ -67,29 +101,6 @@ Here is an example:
         return instance;
     }
 
-
-### Example of Use
-
-    var write = function(file, data, fetch) {
-        var fileSpec = {
-            name:argumentSpec.every([argumentSpec.length(10), "[a-z]+"]) ,
-            extension: "jpg|gif"
-        };
-
-        var dataSpec = {
-            width: argumentSpec.range(20, 500),
-            height: argumentSpec.range(20, 500),
-            buffer: argumentSpec.instance(Buffer)
-        };
-
-        var errorArray = argumentSpec.validate('file', fileSpec, file);
-        errorArray = errorArray.concat(argumentSpec.validate('data', dataSpec, data));
-        errorArray = errorArray.concat(argumentSpec.validate('fetch', function(){}, fetch));
-
-        if (errorArray.length > 0) {
-            throw new Error(errorArray.join('\n'));
-        }
-    }
 
 
             
