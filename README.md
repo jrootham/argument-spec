@@ -4,8 +4,12 @@ A library to ease argument checking, especially complex arguments like options o
 
 ###Usage
 ####Node, Browserify
+At command prompt
+
     npm install argument-spec
-    
+
+In code
+
     argumentSpec = require('argument-spec');
     
 ####RequireJS
