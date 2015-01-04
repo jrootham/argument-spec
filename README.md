@@ -42,12 +42,7 @@ Download argument-spec.js from the most recent release at https://github.com/jro
         }
     }
 
-Variable| Meaning
----------|---------
-errorArray|array of string error messages (empty if no errors)
-name|name of argument, included in error messages
-spec|specification of expected argument (see below)
-argument|argument to validate
+####Specification meanings
 
 Specification|Valid argument
 -----------|----------
