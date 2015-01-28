@@ -30,5 +30,7 @@
     console.log(errorArray);
     var errorArray = argumentSpec.validate('exact', argumentSpec.exact({a:1}), {a:1, b:2})
     console.log(errorArray);
+    var errorArray = argumentSpec.validate('isFalse', argumentSpec.isFalse(), false);
+    console.log(errorArray);
 
 })()

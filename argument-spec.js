@@ -389,6 +389,21 @@
         return optional;
     }
 
+    var isFalse = function() {
+        var isFalse = new Base();
+
+        isFalse.validate = function(name, argument) {
+            var result = [];
+
+            if (argument !== false) {
+                result = [name + " argument is not false"];
+            }
+            return result;
+        }
+
+        return isFalse;
+    }
+
     var ship = {
         validate:       validate,
         Base:           Base,
@@ -399,7 +414,8 @@
         instance:       instance,
         length:         length,
         exact:          exact,
-        optional:       optional
+        optional:       optional,
+        isFalse:        isFalse
     };
 
 // Just return a value to define the module export.

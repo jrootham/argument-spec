@@ -215,5 +215,30 @@
                 expect(errorArray.length).to.equal(0);
             })
         });
+
+        describe('isFalse', function () {
+            it('should return [] if false', function() {
+                var errorArray = argumentSpec.validate('false', argumentSpec.isFalse(), false);
+                expect(errorArray.length).to.equal(0);
+            })
+
+            it('should return [true argument is not false] if true', function() {
+                var errorArray = argumentSpec.validate('true', argumentSpec.isFalse(), true);
+                expect(errorArray.length).to.equal(1);
+                expect(errorArray[0]).to.equal('true argument is not false');
+            })
+
+            it('should return [number argument is not false] if number', function() {
+                var errorArray = argumentSpec.validate('number', argumentSpec.isFalse(), 0);
+                expect(errorArray.length).to.equal(1);
+                expect(errorArray[0]).to.equal('number argument is not false');
+            })
+
+            it('should return [undefined argument is not false] if undefined', function() {
+                var errorArray = argumentSpec.validate('undefined', argumentSpec.isFalse(), undefined);
+                expect(errorArray.length).to.equal(1);
+                expect(errorArray[0]).to.equal('undefined argument is not false');
+            })
+        })
     });
 })();
