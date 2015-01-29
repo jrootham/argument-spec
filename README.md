@@ -20,7 +20,7 @@ Download argument-spec.js from the most recent release at https://github.com/jro
 
 ####Script tag
     <script type="text/javascript"
-            src="https://cdn.rawgit.com/jrootham/argument-spec/v3.0.0/argument-spec.js">
+            src="https://cdn.rawgit.com/jrootham/argument-spec/v3.1.0/argument-spec.js">
     </script>
     
 #### Example of Use
@@ -79,6 +79,7 @@ length(maxLength) | argument.length <= maxLength (argument.length must exist)
 instance(object)|instanceof object
 exact(object)|exact match for object properties, useful for options without defaults
 optional(object)|permit missing properties in the argument, useful for options with defaults
+isFalse()|argument is exactly false
 You can write your own validation functions.
 Here is an example:
 
