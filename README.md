@@ -2,8 +2,8 @@
 
 A library to ease argument checking, especially complex arguments like options objects.
 
-###Usage
-####Node, Browserify
+### Usage
+#### Node, Browserify
 At command prompt
 
     npm install argument-spec
@@ -12,13 +12,13 @@ In code
 
     argumentSpec = require('argument-spec');
     
-####RequireJS
+#### RequireJS
 
 Download argument-spec.js from the most recent release at https://github.com/jrootham/argument-spec/releases and put it in your lib directory.
 
     var argumentSpec = require('argument-spec');
 
-####Script tag
+#### Script tag
     <script type="text/javascript"
             src="https://cdn.rawgit.com/jrootham/argument-spec/v3.1.0/argument-spec.js">
     </script>
@@ -46,7 +46,7 @@ Download argument-spec.js from the most recent release at https://github.com/jro
         }
     }
 
-####Specification meanings
+#### Specification meanings
 
 |Specification|Valid argument|
 -----------|----------
@@ -71,8 +71,8 @@ Functions and related specifications are defined as properties of objects create
 
 Function| definition
 ------------|---
-some([spec1, spec2,...]|           some spec is true for argument
-every([spec1, spec2,...]|          every spec is true for argument (useful for composing specs)
+some([spec1, spec2,...])|           some spec is true for argument
+every([spec1, spec2,...])|          every spec is true for argument (useful for composing specs)
 range(low, high)|          numeric argument in low..high range (inclusive)
 integer()|        integer (fractional part is 0)
 length(maxLength) | argument.length <= maxLength (argument.length must exist)
